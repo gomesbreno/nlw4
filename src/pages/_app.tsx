@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import firebase from "firebase";
 
 import { ChallengesProvider } from "../contexts/ChalengesContext";

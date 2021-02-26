@@ -20,7 +20,7 @@ interface CountdownProviderProps {
   children: ReactNode;
 }
 
-const initialTime = 30 * 60;
+const initialTime = 0.1 * 60;
 let countdownTimeout: NodeJS.Timeout;
 export const CountdownContext = createContext({} as CountdownContextData);
 
