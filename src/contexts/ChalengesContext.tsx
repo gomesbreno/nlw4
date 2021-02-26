@@ -59,15 +59,11 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
       });
   }
 
-  function persistUserProgress({
-    challengesCompleted,
-    currentExperience,
-    level,
-  }) {
+  function persistUserProgress(userProgress: object) {
     firebase
       .database()
       .ref(`/userProgress`)
-      .set({ challengesCompleted, currentExperience, level })
+      .update(userProgress)
       .then(() => {
         console.log("Salvo com sucesso");
       })
@@ -117,7 +113,7 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
     persistUserProgress({
       challengesCompleted: challengesCompleted + 1,
       currentExperience: finalExperience,
-      level: level + 1,
+      ...(finalExperience >= experienceToNextLevel && { level: level + 1 }),
     });
   }
 
