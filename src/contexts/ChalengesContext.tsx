@@ -98,6 +98,7 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
   }
 
   function completeChallenge() {
+    let hasLevelUped = false;
     if (!activeChallenge) {
       return;
     }
@@ -106,6 +107,7 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
     if (finalExperience >= experienceToNextLevel) {
       finalExperience = finalExperience - experienceToNextLevel;
       levelUp();
+      hasLevelUped = true;
     }
     setCurrentExperience(finalExperience);
     setActiveChallenge(null);
@@ -113,7 +115,7 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
     persistUserProgress({
       challengesCompleted: challengesCompleted + 1,
       currentExperience: finalExperience,
-      ...(finalExperience >= experienceToNextLevel && { level: level + 1 }),
+      ...(hasLevelUped && { level: level + 1 }),
     });
   }
 
